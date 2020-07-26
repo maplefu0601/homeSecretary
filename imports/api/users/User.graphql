@@ -1,0 +1,9 @@
+type User {
+  _id: String
+  email: String
+  resolution: [Resolution]
+}
+
+extend type Query {
+  user: User
+}
