@@ -7,6 +7,12 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Button, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import {
+  faHome,
+  faCalendarAlt,
+  faTasks,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import App from '../../ui/App';
 import { RenderRoutes } from '../../ui/Router';
@@ -61,11 +67,20 @@ const ApolloApp = () => {
   return (
     <ApolloProvider client={client}>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="/">Home Secretary</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <FontAwesomeIcon icon={faHome} />
+          Home Secretary
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Nav className="mr-auto">
-          <Nav.Link href="/events">Eventss</Nav.Link>
-          <Nav.Link href="/tasks">Tasks</Nav.Link>
+          <Nav.Link href="/events">
+            <FontAwesomeIcon icon={faCalendarAlt} />
+            Events
+          </Nav.Link>
+          <Nav.Link href="/tasks">
+            <FontAwesomeIcon icon={faTasks} />
+            Tasks
+          </Nav.Link>
         </Nav>
         <LoginNav />
       </Navbar>

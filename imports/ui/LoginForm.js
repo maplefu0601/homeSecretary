@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Accounts } from 'meteor/accounts-base';
 import { withApollo } from 'react-apollo';
 import { Form, Button, Col, Row } from 'react-bootstrap';
-import { AutoForm, AutoField, ErrorField } from 'uniforms-semantic';
+import { AutoForm, AutoField, ErrorField } from 'uniforms-bootstrap4';
 
 import LoginSchema from './schema/login';
 import ErrorFieldEx from './ErrorFieldEx';

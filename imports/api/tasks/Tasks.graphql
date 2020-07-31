@@ -1,0 +1,32 @@
+type Task {
+  _id: String!
+  title: String!
+  content: String
+  progress: Float
+  createdAt: Date
+  createdBy: String
+  members: String
+}
+
+extend type Query {
+  tasks: [Task]
+}
+extend type Mutation {
+  createTask(
+    title: String!
+    content: String
+    progress: Float
+    createdBy: String
+    members: String
+  ): Task
+
+  updateTask(
+    _id: String!
+    title: String
+    content: String
+    progress: Float
+    members: String
+  ): Task
+
+  deleteTask(_id: String!): String
+}

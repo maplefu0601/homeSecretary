@@ -1,0 +1,34 @@
+scalar Date
+
+type Event {
+  _id: String!
+  name: String!
+  content: String
+  progress: Float
+  createdAt: Date
+  createdBy: String
+  members: String
+}
+
+extend type Query {
+  events: [Event]
+}
+extend type Mutation {
+  createEvent(
+    name: String!
+    content: String
+    progress: Float
+    createdBy: String
+    members: String
+  ): Event
+
+  updateEvent(
+    _id: String!
+    name: String
+    content: String
+    progress: Float
+    members: String
+  ): Event
+
+  deleteEvent(_id: String!): String
+}

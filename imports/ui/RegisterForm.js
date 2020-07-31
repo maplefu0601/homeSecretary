@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Accounts } from 'meteor/accounts-base';
 import { Form, Button, Col, Row } from 'react-bootstrap';
-import { AutoForm, AutoField, ErrorField } from 'uniforms-semantic';
+import { AutoForm, AutoField, ErrorField } from 'uniforms-bootstrap4';
 
 import RegisterSchema from './schema/register';
 

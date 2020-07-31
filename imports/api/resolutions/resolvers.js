@@ -3,7 +3,7 @@ import Resolutions from './resolutions';
 // Resolutions.insert({ name: 'Test res' });
 // Resolutions.remove({ _id: 'iXwbnXareR6RYcSxd' });
 const res = Resolutions.find({}).fetch();
-console.log(res);
+// console.log(res);
 
 export default {
   Query: {
@@ -14,6 +14,9 @@ export default {
         return Resolutions.find({ userId: _id }).fetch();
       }
       return Resolutions.find({}).fetch();
+    },
+    users() {
+      return this.users.find({}).fetch();
     },
   },
 

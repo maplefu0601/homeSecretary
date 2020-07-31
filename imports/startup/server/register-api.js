@@ -7,15 +7,27 @@ import ResolutionsSchema from '../../api/resolutions/Resolutions.graphql';
 import ResolutionsResolvers from '../../api/resolutions/resolvers';
 import UsersSchema from '../../api/users/User.graphql';
 import UsersResolvers from '../../api/users/resolvers';
+import EventSchema from '../../api/events/Events.graphql';
+import EventResolvers from '../../api/events/resolvers';
+import TaskSchema from '../../api/tasks/Tasks.graphql';
+import TaskResolvers from '../../api/tasks/resolvers';
 
-//hisss
+//kissss
+//aaadff
 const testSchema = gql`
   type Query {
     hi: String
     resolutions: [Resolution]
+    users: [User]
   }
 `;
-const typeDefs = [testSchema, ResolutionsSchema, UsersSchema];
+const typeDefs = [
+  testSchema,
+  ResolutionsSchema,
+  UsersSchema,
+  EventSchema,
+  TaskSchema,
+];
 
 const testResolvers = {
   Query: {
@@ -25,7 +37,13 @@ const testResolvers = {
   },
 };
 
-const resolvers = merge(testResolvers, ResolutionsResolvers, UsersResolvers);
+const resolvers = merge(
+  testResolvers,
+  ResolutionsResolvers,
+  UsersResolvers,
+  EventResolvers,
+  TaskResolvers,
+);
 
 const server = new ApolloServer({
   typeDefs,

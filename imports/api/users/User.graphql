@@ -1,6 +1,12 @@
+type Profile {
+  name: String
+  email: String
+}
 type User {
   _id: String
   email: String
+  username: String
+  profile: Profile
   resolution: [Resolution]
 }
 
