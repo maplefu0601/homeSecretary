@@ -36,14 +36,26 @@ class TaskForm extends Component {
     super(props);
     this.formRef = null;
     this.props = props;
+
     this.state = {
       showAlert: false,
       alertMessage: '',
-      data: props.data ? props.data : {},
+      data: props.data ? props.data : { members: '' },
+      users: JSON.parse(localStorage.getItem('users')),
     };
   }
   addUser(u) {
-    console.log(u);
+    const { data } = this.state;
+    console.log(u, data);
+    if (!data.members.includes(u._id)) {
+      if (data.members.length > 0) {
+        data.members += `,${u._id}`;
+      } else {
+        data.members = u._id;
+      }
+      console.log('adding new members...', u._id, data);
+      this.setState({ data });
+    }
   }
   submitForm = (model) => {
     console.log(model, this.props);
@@ -76,14 +88,14 @@ class TaskForm extends Component {
   };
 
   handleChange(e, name) {
-    console.log(e, name);
+    // console.log(e, name);
     const { data } = this.state;
     data[name] = e;
     this.setState({ data });
   }
 
   change(model) {
-    console.log(model);
+    // console.log(model);
     let data = model;
 
     this.setState({ data });
@@ -91,6 +103,8 @@ class TaskForm extends Component {
 
   render() {
     const { title, content, progress, members, createdBy } = this.state.data;
+    const { users } = this.state;
+
     return (
       <Row className="justify-content-md-center">
         <Col lg={8}>
@@ -117,40 +131,28 @@ class TaskForm extends Component {
           >
             <Row>
               <Col>
-                <AutoField
-                  name={'title'}
-                  value={title}
-                  //   onChange={(e) => this.handleChange(e, 'title')}
-                />
+                <AutoField name={'title'} value={title} />
                 <ErrorFieldEx name={'title'} />
 
-                <AutoField
-                  name={'content'}
-                  value={content}
-                  //   onChange={(e) => this.handleChange(e, 'content')}
-                />
+                <AutoField name={'content'} value={content} />
                 <ErrorFieldEx name={'content'} />
 
-                <AutoField
-                  name={'progress'}
-                  step={0.1}
-                  value={progress}
-                  //   onChange={(e) => this.handleChange(e, 'progress')}
-                />
+                <AutoField name={'progress'} step={0.1} value={progress} />
                 <ErrorFieldEx name={'progress'} />
 
-                <AutoField
-                  name={'members'}
-                  value={members}
-                  //   onChange={(e) => this.handleChange(e, 'members')}
-                />
-                {/* <UsersForm onSelectUser={this.addUser} /> */}
+                <Row>
+                  <Col>
+                    <AutoField name={'members'} value={members} />
+                  </Col>
+                  <Col sm={2} style={{ marginTop: '-10px' }}>
+                    <UsersForm
+                      users={users}
+                      onSelectUser={(u) => this.addUser(u)}
+                    />
+                  </Col>
+                </Row>
 
-                <AutoField
-                  name={'createdBy'}
-                  value={createdBy}
-                  //   onChange={(e) => this.handleChange(e, 'createdBy')}
-                />
+                <AutoField name={'createdBy'} value={createdBy} />
 
                 <Button
                   variant="secondary"

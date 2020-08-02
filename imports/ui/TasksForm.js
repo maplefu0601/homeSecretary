@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, CardGroup, Table, ProgressBar } from 'react-bootstrap';
-import { faTasks, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTasks,
+  faEdit,
+  faTrashAlt,
+  faCheck,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const TasksForm = ({ data, updateData, deleteData }) => {
+const TasksForm = ({ dataTasks, updateData, deleteData }) => {
   const onEdit = (m) => {
     console.log('edit:', m);
     updateData('task', m);
@@ -13,7 +18,10 @@ const TasksForm = ({ data, updateData, deleteData }) => {
     console.log('delete:', m);
     deleteData('task', m);
   };
-  console.log(data);
+
+  const isDone = (progress) => {
+    return progress * 100 >= 100;
+  };
   return (
     <Card>
       <Card.Body>
@@ -23,12 +31,12 @@ const TasksForm = ({ data, updateData, deleteData }) => {
         <Row
           style={{ minHeight: '700px', maxHeight: '700px', overflow: 'scroll' }}
         >
-          {data.map((m) => (
+          {dataTasks.map((m) => (
             <Col xs={6} key={m._id}>
               <Card
                 bg="secondry"
                 key={m._id}
-                style={{ width: '350px', height: '300px', overflow: 'scroll' }}
+                style={{ width: '350px', height: '350px', overflow: 'scroll' }}
               >
                 <Card.Header>
                   {m.title}
@@ -59,6 +67,19 @@ const TasksForm = ({ data, updateData, deleteData }) => {
                           now={m.progress * 100}
                           label={`${m.progress * 100}%`}
                         />
+                        {isDone(m.progress) && (
+                          <div
+                            style={{
+                              color: 'red',
+                              fontSize: '64px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              marginTop: '-45px',
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faCheck} />
+                          </div>
+                        )}
                       </td>
                     </tr>
                     <tr>

@@ -10,7 +10,7 @@ export default {
       console.log('context: ', obj, args, user);
       if (user) {
         const { _id } = user;
-        return Events.find({ userId: _id }).fetch();
+        return Events.find({ createdBy: _id }).fetch();
       }
       return Events.find({}).fetch();
     },
@@ -35,7 +35,7 @@ export default {
 
     updateEvent(obj, data, { user }) {
       console.log('updateEvent:', data);
-      const { name, content, progress, createdBy, members } = data;
+      const { _id, name, content, progress, createdBy, members } = data;
       const createdAt = new Date();
 
       const ret = Events.update(
@@ -44,13 +44,13 @@ export default {
       );
       console.log('return: ', ret);
 
-      return Events.findOne({ _id: ret.upsertedId });
+      return Events.findOne({ _id });
     },
 
     deleteEvent(obj, data, { user }) {
       console.log('delete event:', data);
       const { _id } = data;
-      const ret = Events.remove({ id });
+      const ret = Events.remove({ _id });
 
       console.log(ret);
       return _id;

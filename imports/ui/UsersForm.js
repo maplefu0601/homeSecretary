@@ -8,13 +8,13 @@ const UsersForm = ({ onSelectUser, loading, users, client, user }) => {
   if (loading) {
     return null;
   }
-  console.log(client, users, user);
+  // console.log(client, users, user);
   return (
-    <div>
+    <div style={{ float: 'right' }}>
       {users && (
         <div>
           <ul>
-            <DropdownButton variant="secondary" title="Users">
+            <DropdownButton variant="secondary" title="Invite">
               {users.map((u) => (
                 <Dropdown.Item
                   key={u._id}
